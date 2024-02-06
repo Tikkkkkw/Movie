@@ -162,8 +162,24 @@ public class MovieCollection
         System.out.println("Box office revenue: " + movie.getRevenue());
     }
 
+    private ArrayList<String> casts () {
+
+        ArrayList<String> allCastList = new ArrayList<String>();
+
+        for (Movie movie : movies) {
+            String cast = movie.getCast();
+            if (!(allCastList.contains(cast))) {
+                allCastList.add(cast);
+            }
+
+        }
+        return allCastList;
+    }
     private void searchCast()
     {
+
+        System.out.println(casts());
+
 
     }
 
@@ -189,7 +205,7 @@ public class MovieCollection
             }
         }
 
-        // sort the results by title
+        // sort the results by keyword
         sortResults(results);
 
         // now, display them all to the user
