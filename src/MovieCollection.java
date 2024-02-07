@@ -1,8 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.util.HashMap;
 
 public class MovieCollection
 {
@@ -175,6 +175,7 @@ public class MovieCollection
         }
         return allCastList;
     }
+
     private void searchCast()
     {
 
@@ -182,6 +183,7 @@ public class MovieCollection
 
 
     }
+
 
     private void searchKeywords()
     {
@@ -235,10 +237,47 @@ public class MovieCollection
 
     }
 
-    private void listGenres()
-    {
 
+    private void genres() {
+//        ArrayList<ArrayList<String>> genres = new ArrayList<ArrayList<String>>();
+        ArrayList<String> genre = new ArrayList<String>();
+        int i = 0;
+        for (Movie movie : movies) {
+            i++;
+//            String g =  movie.getGenres();
+            String[] g = (movie.getGenres().split("\\|"));
+            for (String genreName : g) {
+                if (genre.contains(genreName) == false) {
+                    genre.add(genreName);
+                }
+            }
+        }
+        HashMap<String, ArrayList<String>> genreList = new HashMap<String, ArrayList<String>>();
+        for (String s : genre){
+            ArrayList<String> moviesByGenre = new ArrayList<String>();
+            genreList.put(s,moviesByGenre);
+        }
+
+
+            //genre.add(g[i]);
+        Collections.sort(genre);
+        System.out.println(genre);
     }
+
+
+        // Make a HashMap object, add each genre as a key
+        // For each key in your map, create an empty list
+        // Go through each movie, find each genre. add movie to genre key if it matches
+
+
+    private void listGenres() {
+        for (Movie movie : movies) {
+            System.out.print(movie.getTitle() );
+            System.out.println(" | Genre: " + movie.getGenres());
+        }
+    }
+
+
 
     private void listHighestRated()
     {
