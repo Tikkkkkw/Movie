@@ -376,15 +376,86 @@ public class MovieCollection
         ArrayList<Movie> top50 = new ArrayList<Movie>();
         ArrayList<Double> d = new ArrayList<Double>();
         for (Movie m : movies) {
-        d.add(m.getUserRating());
+            d.add(m.getUserRating());
+        }
         d.sort(Collections.reverseOrder());
 
+        for (int i = 0; i < 50;  ) {
+        for (Movie movie : movies) {
+                double movieRate = movie.getUserRating();
+                if ((movieRate == (d.get(i))) && (!top50.contains(movie))) {
+                     top50.add(movie);
+                     i ++;
+                     break;
+            }
         }
+        }
+        for (int i = 0; i < 50; i++)
+        {
+            String title = top50.get(i).getTitle();
+            String rating = Double.toString(top50.get(i).getUserRating());
+            // this will print index 0 as choice 1 in the results list; better for user!
+            int choiceNum = i + 1;
+
+            System.out.println("" + choiceNum + ". " + title + ": " +rating);
+        }
+
+        System.out.println("Which movie would you like to learn more about?");
+        System.out.print("Enter number: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        Movie selectedMovie = top50.get(choice - 1);
+
+        displayMovieInfo(selectedMovie);
+
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
 
         }
 
         private void listHighestRevenue ()
         {
+            ArrayList<Movie> top50 = new ArrayList<Movie>();
+            ArrayList<Integer> d = new ArrayList<Integer>();
+            for (Movie m : movies) {
+                d.add(m.getRevenue());
+            }
+            d.sort(Collections.reverseOrder());
+
+            for (int i = 0; i < 50;  ) {
+                for (Movie movie : movies) {
+                    int movieRate = movie.getRevenue();
+                    if ((movieRate == (d.get(i))) && (!top50.contains(movie))) {
+                        top50.add(movie);
+                        i ++;
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < 50; i++)
+            {
+                String title = top50.get(i).getTitle();
+                String rating = Integer.toString(top50.get(i).getRevenue());
+                // this will print index 0 as choice 1 in the results list; better for user!
+                int choiceNum = i + 1;
+
+                System.out.println("" + choiceNum + ". " + title + ": " +rating);
+            }
+
+            System.out.println("Which movie would you like to learn more about?");
+            System.out.print("Enter number: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            Movie selectedMovie = top50.get(choice - 1);
+
+            displayMovieInfo(selectedMovie);
+
+            System.out.println("\n ** Press Enter to Return to Main Menu **");
+            scanner.nextLine();
 
         }
 
